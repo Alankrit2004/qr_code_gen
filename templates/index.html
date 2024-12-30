@@ -14,7 +14,7 @@
 
     {% if qr_code %}
         <h2>Your QR Code:</h2>
-        <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+        <img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" style="width: 200px; height: auto;">
         <a href="data:image/png;base64,{{ qr_code }}" download>
             <button>Download QR Code</button>
         </a>

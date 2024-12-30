@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request
 import qrcode
 import time
 import io
+import base64
 
 app = Flask(__name__)
 
@@ -32,7 +33,10 @@ def generate():
     img.save(img_bytes)
     img_bytes.seek(0)  # Move to the beginning of the BytesIO buffer
     
-    return send_file(img_bytes, mimetype='image/png', as_attachment=False)
+    # Encode the image to base64 for inline display
+    img_base64 = base64.b64encode(img_bytes.getvalue()).decode('utf-8')
+    
+    return render_template('index.html', qr_code=img_base64)
 
 if __name__ == '__main__':
     app.run(debug=True)
